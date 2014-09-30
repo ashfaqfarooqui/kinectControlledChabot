@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ChabotControl" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ChabotControl" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Include" />
+					<Add directory="../OpenNI/Include" />
+					<Add directory="../SensorKinect-unstable/Include/XnEE" />
+					<Add directory="../SensorKinect-unstable/Include" />
+					<Add directory="../../../../usr/include/ni" />
+					<Add directory="/usr/include" />
+					<Add directory="/home/ashfaq/kinect/ChabotControl/" />
+					<Add directory="/home/ashfaq/kinect/hardware/libchabot_14j2/libchabot" />
+				</Compiler>
+				<Linker>
+					<Add option="-lOpenNI -lglut -lGL -lGLU" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVCNITE_1_3_1.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVCNITE_1_4_1.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVCNITE_1_4_2.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVCNITE_1_5_2.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVFeatures_1_5_2.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVHandGenerator_1_5_2.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVNite_1_3_0.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVNite_1_3_1.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVNite_1_4_1.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVNite_1_4_2.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVNite_1_5_2.so" />
+					<Add library="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Bin/libXnVNITE.jni.so" />
+					<Add library="../OpenNI/Platform/Linux/Bin/x64-Release/libnimCodecs.so" />
+					<Add library="../OpenNI/Platform/Linux/Bin/x64-Release/libnimMockNodes.so" />
+					<Add library="../OpenNI/Platform/Linux/Bin/x64-Release/libnimRecorder.so" />
+					<Add library="../OpenNI/Platform/Linux/Bin/x64-Release/libOpenNI.jni.so" />
+					<Add library="../OpenNI/Platform/Linux/Bin/x64-Release/libOpenNI.so" />
+					<Add library="../OpenNI/Platform/Linux/Bin/x64-Release/libSample-NiSampleModule.so" />
+					<Add library="../SensorKinect-unstable/Platform/Linux/Bin/x64-Release/libXnCore.so" />
+					<Add library="../SensorKinect-unstable/Platform/Linux/Bin/x64-Release/libXnDDK.so" />
+					<Add library="../SensorKinect-unstable/Platform/Linux/Bin/x64-Release/libXnDeviceFile.so" />
+					<Add library="../SensorKinect-unstable/Platform/Linux/Bin/x64-Release/libXnDeviceSensorV2KM.so" />
+					<Add library="../SensorKinect-unstable/Platform/Linux/Bin/x64-Release/libXnFormats.so" />
+					<Add library="/usr/local/lib/libopencv_calib3d.so" />
+					<Add library="/usr/local/lib/libopencv_contrib.so" />
+					<Add library="/usr/local/lib/libopencv_core.so" />
+					<Add library="/usr/local/lib/libopencv_features2d.so" />
+					<Add library="/usr/local/lib/libopencv_flann.so" />
+					<Add library="/usr/local/lib/libopencv_gpu.so" />
+					<Add library="/usr/local/lib/libopencv_highgui.so" />
+					<Add library="/usr/local/lib/libopencv_imgproc.so" />
+					<Add library="/usr/local/lib/libopencv_legacy.so" />
+					<Add library="/usr/local/lib/libopencv_ml.so" />
+					<Add library="/usr/local/lib/libopencv_nonfree.so" />
+					<Add library="/usr/local/lib/libopencv_objdetect.so" />
+					<Add library="/usr/local/lib/libopencv_ocl.so" />
+					<Add library="/usr/local/lib/libopencv_photo.so" />
+					<Add library="/usr/local/lib/libopencv_stitching.so" />
+					<Add library="/usr/local/lib/libopencv_superres.so" />
+					<Add library="/usr/local/lib/libopencv_ts.a" />
+					<Add library="/usr/local/lib/libopencv_video.so" />
+					<Add library="/usr/local/lib/libopencv_videostab.so" />
+					<Add library="/home/ashfaq/kinect/hardware/libchabot_14j2/libchabot/libchabot.a" />
+					<Add library="/usr/lib/x86_64-linux-gnu/libboost_system.a" />
+					<Add library="/usr/lib/x86_64-linux-gnu/libboost_system.so" />
+					<Add library="/usr/lib/x86_64-linux-gnu/libboost_thread.so" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ChabotControl" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="/usr/local/lib/libfreenect_sync.so" />
+					<Add library="/usr/local/lib/libopencv_calib3d.so" />
+					<Add library="/usr/local/lib/libopencv_contrib.so" />
+					<Add library="/usr/local/lib/libopencv_core.so" />
+					<Add library="/usr/local/lib/libopencv_features2d.so" />
+					<Add library="/usr/local/lib/libopencv_flann.so" />
+					<Add library="/usr/local/lib/libopencv_gpu.so" />
+					<Add library="/usr/local/lib/libopencv_highgui.so" />
+					<Add library="/usr/local/lib/libopencv_imgproc.so" />
+					<Add library="/usr/local/lib/libopencv_legacy.so" />
+					<Add library="/usr/local/lib/libopencv_ml.so" />
+					<Add library="/usr/local/lib/libopencv_nonfree.so" />
+					<Add library="/usr/local/lib/libopencv_objdetect.so" />
+					<Add library="/usr/local/lib/libopencv_ocl.so" />
+					<Add library="/usr/local/lib/libopencv_photo.so" />
+					<Add library="/usr/local/lib/libopencv_stitching.so" />
+					<Add library="/usr/local/lib/libopencv_superres.so" />
+					<Add library="/usr/local/lib/libopencv_ts.a" />
+					<Add library="/usr/local/lib/libopencv_video.so" />
+					<Add library="/usr/local/lib/libopencv_videostab.so" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="../OpenNI/Include" />
+			<Add directory="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Include" />
+			<Add directory="../SensorKinect-unstable/Include" />
+		</Compiler>
+		<Linker>
+			<Add option="-lOpenNI" />
+			<Add library="/usr/local/lib/libfreenect_sync.so" />
+			<Add library="/usr/local/lib/libopencv_calib3d.so" />
+			<Add library="/usr/local/lib/libopencv_contrib.so" />
+			<Add library="/usr/local/lib/libopencv_core.so" />
+			<Add library="/usr/local/lib/libopencv_features2d.so" />
+			<Add library="/usr/local/lib/libopencv_flann.so" />
+			<Add library="/usr/local/lib/libopencv_gpu.so" />
+			<Add library="/usr/local/lib/libopencv_highgui.so" />
+			<Add library="/usr/local/lib/libopencv_imgproc.so" />
+			<Add library="/usr/local/lib/libopencv_legacy.so" />
+			<Add library="/usr/local/lib/libopencv_ml.so" />
+			<Add library="/usr/local/lib/libopencv_nonfree.so" />
+			<Add library="/usr/local/lib/libopencv_objdetect.so" />
+			<Add library="/usr/local/lib/libopencv_ocl.so" />
+			<Add library="/usr/local/lib/libopencv_photo.so" />
+			<Add library="/usr/local/lib/libopencv_stitching.so" />
+			<Add library="/usr/local/lib/libopencv_superres.so" />
+			<Add library="/usr/local/lib/libopencv_video.so" />
+			<Add library="/usr/local/lib/libopencv_videostab.so" />
+			<Add directory="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Lib" />
+		</Linker>
+		<Unit filename="SceneDrawer.cpp" />
+		<Unit filename="SceneDrawer.h" />
+		<Unit filename="angleCalculation.cpp" />
+		<Unit filename="angleCalculation.h" />
+		<Unit filename="chabot.cpp" />
+		<Unit filename="chabot.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion>
+				<search_path add="../NITE-Bin-Dev-Linux-x64-v1.5.2.21/Include" />
+			</code_completion>
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
