@@ -13,7 +13,7 @@ int init_socket()
 
 
 
-	servIP = "127.0.0.1";
+	servIP = "10.42.0.56";
     ServPort = 777;
 
 
@@ -60,13 +60,13 @@ void DieWithError(char *errorMessage)
     exit(1);
 }
 
-void sendData(int packetType, int leftX, int leftY, int rightX, int rightY, int sock)
+void sendData(int packetType, int left,int right, int sock)
 {
 		unsigned int MsgStringLen;      /* Length of string*/
 		char MsgString [20] ;
 
 		ostringstream packet;
-		packet<<packetType<<"D"<<leftX<<"D"<<leftY<<"D"<<rightX<<"D"<<rightY<<"D";
+		packet<<packetType<<","<<left<<","<<right<<",";
         //cout<<"packet:"<<packet.str()<<endl;
 		//cout<<"packetsize:"<<packet.str().size()<<endl;
 
@@ -92,7 +92,7 @@ void sendData(int packetType, int leftX, int leftY, int rightX, int rightY, int 
         const char* packetStr=packet.str().data();
 
 		/* Send the string to the server */
-
+        //sendto(sock, packetStr, packet.str().size(),0, (struct sockaddr *) &ServAddr, sizeof(ServAddr));
 		if (send(sock, packetStr, packet.str().size(), 0) != packet.str().size()){}
 		//DieWithError("send() sent a different number of bytes than expected");
 

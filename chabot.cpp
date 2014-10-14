@@ -1,111 +1,140 @@
-#include <chabot.h>
+#include <iostream>
+#include <cmath>
+//#include <boost/lexical_cast.hpp>
+//#include </Users/thorvaldurarnason/chabot//libchabot/boost_1_56_0/boost/lexical_cast.hpp>
+#include "Runner.h"
+#include "chabot.h"
 
 chabot::Runner* runner;
-int ctrl_right = 2;
-	int ctrl1 = 1;
 
-	int id_shoulderUpper = 1;
-	int id_shoulderLower = 2;
-	int id_elbow = 3;
-	int id_wrist = 4;
 
-void init_chabot()
+
+
+/*
+int main(int argc, char* argv[])
 {
-    int nrOfJoints = 5;
-    runner = new chabot::Runner("/dev/ttyUSB0",9600);
-    for (int i = 1; i < nrOfJoints ; i++) {
-		runner->setServoSpeed(2,i,0xAF);
-		runner->setServoSpeed(3,i,0xAF);
-	}
-}
-void setAngles()
-{
-	int angleShoulder=380 + ((double)340/(double)90)*filteredAngles[LEFT_SHOULDER][Y_ANGLE];
+	init_chabot();
 
-    runner->setServoPostion(2,id_shoulderLower,angleShoulder );
+	int degValue = 90;
+	int degValue1 = 90;
+	int degValue2 = 90;
+	int degValue3 = 0;
+	int degValue4 = 0;
+	int degValue5 = 0;
 
 
-//	runner->setServoPostion(ctrl_right,id_wrist, servoValue_Right_Wrist);
-}
-void destryRunner()
-{
-    std::cout << "Destroying runner" << std::endl;
-	getchar();
-	delete runner;
-    std::cout << "END" << std::endl;
-}
-/*int chabot()
-{
-	chabot::Runner* runner = new chabot::Runner("/dev/cu.usbserial-DA00LMSI",9600);
-	std::cout << "START" << std::endl;
-	int nrOfJoints = 5;
-	int ctrl1 = 1;
-	int ctrl_right = 2;
-	int ctrl_left = 3;
-	int id_shoulderUpper = 1;
-	int id_shoulderLower = 2;
-	int id_elbow = 3;
-	int id_wrist = 4;
+	setAngles(ctrl_left,id_shoulderLower,degValue);
+	setAngles(ctrl_left,id_elbow,degValue1);
+	setAngles(ctrl_left,id_shoulderUpper,degValue1);
+/*	setAngles(ctrl_right,id_shoulderLower,degValue1);
+	setAngles(ctrl_left,id_elbow,degValue2);
+	setAngles(ctrl_right,id_elbow,degValue2);
 
-	// joint values in Degrees
-	int degValue_Right_Shoulder[4]= {0, 20, 45, 90};
-	int degValue_Right_Elbow[4]= {0, 10, 30, 10};
-	int degValue_Right_Wrist[4]= {0, 20, 40, 90};
+	setAngles(ctrl_left,id_shoulderUpper,degValue2);
+	setAngles(ctrl_right,id_shoulderUpper,degValue2);
 
+	setAngles(ctrl_left,id_wrist,degValue3);
+	setAngles(ctrl_right,id_wrist,degValue3);
+	setAngles(ctrl_left,id_elbow,degValue5);
+	setAngles(ctrl_right,id_elbow,degValue5);
 
+	setAngles(ctrl_left,id_shoulderUpper,degValue3);
+	setAngles(ctrl_right,id_shoulderUpper,degValue3);
 
-	//set the speed
-	for (int i = 1; i < nrOfJoints ; i++) {
-		runner->setServoSpeed(ctrl_right,i,0xAF);
-		runner->setServoSpeed(ctrl_left,i,0xAF);
-	}
+	setAngles(ctrl_left,id_shoulderLower,degValue4);
+	setAngles(ctrl_right,id_shoulderLower,degValue4);
 
-	int servoValue_Right_Shoulder = 380 + ((double)340/(double)90)*degValue_Right_Shoulder[3];
-	int servoValue_Right_Elbow = 500 + ((double)290/(double)80)*degValue_Right_Elbow[3];
-	int servoValue_Right_Wrist = 500 + ((double)300/(double)90)*degValue_Right_Wrist[3];
-	std::cout << "shoulder lower : "<<servoValue_Right_Shoulder << std::endl;
-	std::cout << "shoulder elbow : "<<servoValue_Right_Elbow << std::endl;
-	//std::cout << "shoulder wrist : "<<servoValue_Right_Wrist << std::endl;
-	runner->setServoPostion(ctrl_right,id_shoulderLower, servoValue_Right_Shoulder);
-	runner->setServoPostion(ctrl_right,id_elbow, servoValue_Right_Elbow);
-	runner->setServoPostion(ctrl_right,id_wrist, servoValue_Right_Wrist);
+	setAngles(ctrl_left,id_wrist,degValue);
+	setAngles(ctrl_right,id_wrist,degValue);
+	setAngles(ctrl_left,id_shoulderLower,degValue1);
+	setAngles(ctrl_right,id_shoulderLower,degValue1);
 
+	setAngles(ctrl_left,id_wrist,degValue3);
+	setAngles(ctrl_right,id_wrist,degValue3);
+	setAngles(ctrl_left,id_elbow,degValue5);
+	setAngles(ctrl_right,id_elbow,degValue5);
+	setAngles(ctrl_left,id_shoulderLower,degValue4);
+	setAngles(ctrl_right,id_shoulderLower,degValue4);
+*/
 /*
-	//Set position
-	for (int ii = 0; ii<4; ii++) {
-		//calculations for servo values.
-		int servoValue_Right_Shoulder = 380 + ((double)340/(double)90)*degValue_Right_Shoulder[ii];
-		int servoValue_Right_Elbow = 500 + ((double)290/(double)80)*degValue_Right_Elbow[ii];
-		int servoValue_Right_Wrist = 500 + ((double)300/(double)90)*degValue_Right_Wrist[ii];
-		std::cout << "shoulder lower : "<<servoValue_Right_Shoulder << std::endl;
-		std::cout << "shoulder elbow : "<<servoValue_Right_Elbow << std::endl;
-		std::cout << "shoulder wrist : "<<servoValue_Right_Wrist << std::endl;
-		runner->setServoPostion(ctrl_right,id_shoulderLower, servoValue_Right_Shoulder);
-		runner->setServoPostion(ctrl_right,id_elbow, servoValue_Right_Elbow);
-		runner->setServoPostion(ctrl_right,id_wrist, servoValue_Right_Wrist);
-	}
-	/*
-	std::cout << "shoulder lower : "<<servoValue_Right_Shoulder << std::endl;
-	std::cout << "shoulder elbow : "<<servoValue_Right_Elbow << std::endl;
-	std::cout << "shoulder wrist : "<<servoValue_Right_Wrist << std::endl;
-	runner->setServoPostion(ctrl2,id_shoulderLower, servoValue_Right_Shoulder);
-	runner->setServoPostion(ctrl2,id_elbow, servoValue_Right_Elbow);
-	runner->setServoPostion(ctrl2,id_wrist, servoValue_Right_Wrist);
-	 */
-
-
-
-/*	while (-1) {
-		//runner->getServoPostion(ctrl3,id2,&pos);
-		std::cout << pos <<std::endl;
-	}
-*/
-
-/*    std::cout << "Destroying runner" << std::endl;
-	getchar();
-	delete runner;
-    std::cout << "END" << std::endl;
+	destroy_runner();
     return 0;
-
 }
 */
+
+void init_chabot(){
+	std::cout << "START" << std::endl;
+	runner = new chabot::Runner("/dev/ttyUSB0",9600);
+	for (int i = 1; i < nrOfJoints; i++) {
+		runner->setServoSpeed(ctrl_right,i,0x9F);
+		runner->setServoSpeed(ctrl_left,i,0x9F);
+	}
+}
+
+void destroy_runner(){
+	std::cout << "Destroying runner" << std::endl;
+//	std::getchar();
+	delete runner;
+    std::cout << "END" << std::endl;
+}
+
+void checkIncr(int oldAngle, int newAngle){
+	int stepIncr = 5;
+	int absValue = abs(oldAngle-newAngle);
+	if (absValue > stepIncr) {
+		oldAngle = newAngle;
+	}
+
+}
+
+void setAngles(int controller, int joint, int angle){
+	int servoValue;
+	servoValue = degToServo(controller, joint, angle);
+	runner->setServoPostion(controller, joint, servoValue);
+}
+
+int degToServo(int controller, int joint, int angle){
+	int startPoint;
+	double uppValue;
+	if ( controller == 2) {
+		if (joint == 1) {
+			startPoint = 512;
+			uppValue =330;
+		}
+		else if(joint == 2){
+			startPoint = 380;
+			uppValue = 340;
+		}
+		else if(joint == 3){
+			startPoint = 790;
+			uppValue = -290;
+		}
+		else if(joint == 4){
+			startPoint = 500;
+			uppValue = 300;
+		}
+	}
+	else if ( controller == 3) {
+		if (joint == 1) {
+			startPoint = 512;
+			uppValue =-330;
+		}
+		else if(joint == 2){
+			startPoint = 670;
+			uppValue = -330;
+		}
+		else if(joint == 3){
+			startPoint = 210;
+			uppValue = 310;
+		}
+		else if(joint == 4){
+			startPoint = 500;
+			uppValue = -300;
+		}
+	}
+	int servoValue = startPoint + (uppValue/(double)90)*angle;
+	std::cout << "angle " << angle << std::endl;
+	std::cout << "joint " << joint << std::endl;
+	//std::cout << "uppValue " << uppValue << std::endl;
+	return servoValue;
+}

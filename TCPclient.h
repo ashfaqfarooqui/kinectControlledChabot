@@ -14,7 +14,7 @@
 
 extern int createdSocket;
 void DieWithError(char *errorMessage);  /* Error handling function */
-void sendData(int , int , int , int , int , int );
+void sendData(int , int ,int , int );
 int init_socket();
 
 

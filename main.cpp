@@ -27,7 +27,11 @@
 #include <XnCppWrapper.h>
 #include <SceneDrawer.h>
 #include <XnPropNames.h>
-#include <chabot.h>
+//#include <chabot.h>
+#include <cv.hpp>
+#include <highgui.h>
+#include<angleCalculation.h>
+#include<TCPclient.h>
 //---------------------------------------------------------------------------
 // Globals
 //---------------------------------------------------------------------------
@@ -36,6 +40,7 @@ xn::ScriptNode g_scriptNode;
 xn::DepthGenerator g_DepthGenerator;
 xn::UserGenerator g_UserGenerator;
 xn::Player g_Player;
+xn::HandsGenerator handGenerator;
 
 XnBool g_bNeedPose = FALSE;
 XnChar g_strPose[20] = "";
@@ -47,6 +52,9 @@ XnBool g_bPrintState = TRUE;
 
 XnBool g_bPrintFrameID = FALSE;
 XnBool g_bMarkJoints = FALSE;
+
+void glInitBGR (int * pargc, char ** argv);
+void bgrDisplay (void);
 
 #ifndef USE_GLES
 #if (XN_PLATFORM == XN_PLATFORM_MACOSX)
@@ -72,18 +80,36 @@ XnBool g_bRecord = false;
 
 XnBool g_bQuit = false;
 
+
+using namespace std;
+//for Second window
+float* g_pDepthHist;
+XnRGB24Pixel* g_pTexMap = NULL;
+unsigned int g_nTexMapX = 0;
+unsigned int g_nTexMapY = 0;
+XnDepthPixel g_nZRes;
+
+int createdSocket;
 //---------------------------------------------------------------------------
 // Code
 //---------------------------------------------------------------------------
 
 void CleanupExit()
 {
+    pos zero,res;
+    zero.x=0;
+    zero.y=0;
+    res.x=640;
+    res.y=480;
 	g_scriptNode.Release();
 	g_DepthGenerator.Release();
 	g_UserGenerator.Release();
 	g_Player.Release();
 	g_Context.Release();
-    destryRunner();
+  //  destryRunner();
+    writeDepthMap(zero,res,"Depth_map");
+    cvDestroyAllWindows();
+    close(createdSocket);
 	exit (1);
 }
 
@@ -156,7 +182,10 @@ void XN_CALLBACK_TYPE UserCalibration_CalibrationComplete(xn::SkeletonCapability
 		}
 	}
 }
-
+void XN_CALLBACK_TYPE TouchingCallback(xn::HandTouchingFOVEdgeCapability& generator, XnUserID id, const XnPoint3D* pPosition, XnFloat fTime, XnDirection eDir, void* pCookie)
+{
+	std::cout<<"detectedHands"<<std::endl;
+	}
 #define XN_CALIBRATION_FILE_NAME "UserCalibration.bin"
 
 // Save calibration to file
@@ -221,7 +250,6 @@ void glutDisplay (void)
 #endif
 
 	glDisable(GL_TEXTURE_2D);
-
 	if (!g_bPause)
 	{
 		// Read next available data
@@ -237,8 +265,6 @@ void glutDisplay (void)
 	glutSwapBuffers();
 #endif
 }
-
-#ifndef USE_GLES
 void glutIdle (void)
 {
 	if (g_bQuit) {
@@ -292,6 +318,7 @@ void glutKeyboard (unsigned char key, int /*x*/, int /*y*/)
 	case 'L':
 		LoadCalibration();
 		break;
+
 	}
 }
 void glInit (int * pargc, char ** argv)
@@ -313,7 +340,8 @@ void glInit (int * pargc, char ** argv)
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
-#endif // USE_GLES
+
+
 
 #define SAMPLE_XML_PATH "/home/ashfaq/kinect/OpenNI/Data/SamplesConfig.xml"
 
@@ -327,7 +355,10 @@ void glInit (int * pargc, char ** argv)
 int main(int argc, char **argv)
 {
 	XnStatus nRetVal = XN_STATUS_OK;
-    init_chabot();
+cv::namedWindow("name",CV_WINDOW_AUTOSIZE);
+//    init_chabot();
+  //  createdSocket=init_socket();
+
 	if (argc > 1)
 	{
 		nRetVal = g_Context.Init();
@@ -356,7 +387,8 @@ int main(int argc, char **argv)
 			return (nRetVal);
 		}
 	}
-
+    g_Context.FindExistingNode(XN_NODE_TYPE_IMAGE, imageGenerator);
+    g_Context.FindExistingNode(XN_NODE_TYPE_HANDS,handGenerator);
 	nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_DEPTH, g_DepthGenerator);
 	if (nRetVal != XN_STATUS_OK)
 	{
@@ -402,6 +434,14 @@ int main(int argc, char **argv)
 		printf("Supplied user generator doesn't support skeleton\n");
 		return 1;
 	}
+	//
+	XnCallbackHandle h;
+	if (handGenerator.IsCapabilitySupported(XN_CAPABILITY_HAND_TOUCHING_FOV_EDGE))
+	{
+	std::cout<<"in"<<std::endl;
+		handGenerator.GetHandTouchingFOVEdgeCap().RegisterToHandTouchingFOVEdge(TouchingCallback, NULL, h);
+	}
+	//
 	nRetVal = g_UserGenerator.RegisterUserCallbacks(User_NewUser, User_LostUser, NULL, hUserCallbacks);
 	CHECK_RC(nRetVal, "Register to user callbacks");
 	nRetVal = g_UserGenerator.GetSkeletonCap().RegisterToCalibrationStart(UserCalibration_CalibrationStart, NULL, hCalibrationStart);
