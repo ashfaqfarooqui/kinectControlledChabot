@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1413238007 source:/home/ashfaq/kinect/ChabotControl/main.cpp
+1413411496 source:/home/ashfaq/kinect/ChabotControl/main.cpp
 	<XnOpenNI.h>
 	<XnCodecIDs.h>
 	<XnCppWrapper.h>
@@ -425,7 +425,7 @@
 1411674260 /home/ashfaq/kinect/ChabotControl//angleCalculation.cpp
 	<angleCalculation.h>
 
-1413244502 /home/ashfaq/kinect/ChabotControl//angleCalculation.h
+1413414915 /home/ashfaq/kinect/ChabotControl//angleCalculation.h
 	<stdio.h>
 	<iostream>
 	<XnCppWrapper.h>
@@ -437,8 +437,10 @@
 	<cv.h>
 	<highgui.h>
 	<TCPclient.h>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
 
-1413238793 source:/home/ashfaq/kinect/ChabotControl/angleCalculation.cpp
+1413418540 source:/home/ashfaq/kinect/ChabotControl/angleCalculation.cpp
 	<angleCalculation.h>
 
 1412946097 /home/ashfaq/kinect/ChabotControl//chabot.h
@@ -8451,4 +8453,25 @@
 	<boost/lexical_cast.hpp>
 	"Runner.h"
 	<angleCalculation.h>
+
+1413417087 source:/home/ashfaq/kinect/ChabotControl/handDetect.cpp
+	"handdetect.h"
+
+1413417105 /home/ashfaq/kinect/ChabotControl/handdetect.h
+	"angleCalculation.h"
+
+1413414915 /home/ashfaq/kinect/ChabotControl/angleCalculation.h
+	<stdio.h>
+	<iostream>
+	<XnCppWrapper.h>
+	<math.h>
+	<unistd.h>
+	<stdlib.h>
+	<stdint.h>
+	<GL/glut.h>
+	<cv.h>
+	<highgui.h>
+	<TCPclient.h>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
 

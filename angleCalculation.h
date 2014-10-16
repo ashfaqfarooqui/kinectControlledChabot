@@ -12,6 +12,8 @@
 #include <cv.h>
 #include <highgui.h>
 #include <TCPclient.h>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 
 #define HEAD 0
@@ -29,6 +31,8 @@
 #define SHOULDER_PACKET 1024
 #define ELBOW_PACKET 512
 #define HAND_PACKET 256
+#define HIP_PACKET 128
+#define CLAW_PACKET 64
 
 #define X_ANGLE 1
 #define Y_ANGLE 2
@@ -50,8 +54,11 @@ extern xn::ImageGenerator imageGenerator;
 extern xn::HandsGenerator handGenerator;
 extern XnSkeletonJointPosition userJointPosition[10];
 extern XnSkeletonJointOrientation userJointOrientation[10];
-extern int depth_map[640][480];
+extern uint16_t depth_map[480][640];
 extern double filteredAngles[10][3];
+
+extern bool LeftHandState,RightHandState;
+extern int lowThreshold;
 
 
 struct pos{
@@ -62,7 +69,7 @@ void findUserOrdinates(XnUserID);
 void write_data();
 void ordinates(XnUserID ,XnSkeletonJoint,int);
 void averagingFilter(int );
-void findHand( );
+void findHand( int);
 void writeDepthMap(pos, pos,char*);
 int movingAverageFilter(float angle,int loc);
 
@@ -79,5 +86,7 @@ float magnitude(XnVector3D a);
 float dotProduct(XnVector3D a,XnVector3D b);
 
 void writeHandToFile();
+
+extern XnPoint3D skeletonPoints[24];
 
 #endif // ANGLECALCULATION_H_INCLUDED

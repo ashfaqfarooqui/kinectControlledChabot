@@ -56,6 +56,9 @@ XnBool g_bMarkJoints = FALSE;
 void glInitBGR (int * pargc, char ** argv);
 void bgrDisplay (void);
 
+int lowThreshold;
+int const max_lowThreshold = 100;
+
 #ifndef USE_GLES
 #if (XN_PLATFORM == XN_PLATFORM_MACOSX)
 	#include <GLUT/glut.h>
@@ -88,7 +91,7 @@ XnRGB24Pixel* g_pTexMap = NULL;
 unsigned int g_nTexMapX = 0;
 unsigned int g_nTexMapY = 0;
 XnDepthPixel g_nZRes;
-
+void setThreshold();
 int createdSocket;
 //---------------------------------------------------------------------------
 // Code
@@ -96,7 +99,7 @@ int createdSocket;
 
 void CleanupExit()
 {
-    pos zero,res;
+ pos zero,res;
     zero.x=0;
     zero.y=0;
     res.x=640;
@@ -318,6 +321,12 @@ void glutKeyboard (unsigned char key, int /*x*/, int /*y*/)
 	case 'L':
 		LoadCalibration();
 		break;
+    case 'o':
+        LeftHandState=~LeftHandState;
+        break;
+    case 'q':
+        RightHandState=~RightHandState;
+
 
 	}
 }
@@ -355,9 +364,7 @@ void glInit (int * pargc, char ** argv)
 int main(int argc, char **argv)
 {
 	XnStatus nRetVal = XN_STATUS_OK;
-cv::namedWindow("name",CV_WINDOW_AUTOSIZE);
-//    init_chabot();
-  //  createdSocket=init_socket();
+ //   createdSocket=init_socket();
 
 	if (argc > 1)
 	{
@@ -473,6 +480,9 @@ cv::namedWindow("name",CV_WINDOW_AUTOSIZE);
 	nRetVal = g_Context.StartGeneratingAll();
 	CHECK_RC(nRetVal, "StartGenerating");
 
+
+//	cv::createTrackbar( "Min Threshold:", "Full", &lowThreshold, lowThreshold*3, setThreshold );
+
 #ifndef USE_GLES
 	glInit(&argc, argv);
 	glutMainLoop();
@@ -497,4 +507,9 @@ cv::namedWindow("name",CV_WINDOW_AUTOSIZE);
 
 	CleanupExit();
 #endif
+}
+
+void setThreshold()
+{
+    ;
 }

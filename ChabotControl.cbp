@@ -102,6 +102,8 @@
 		<Unit filename="angleCalculation.h" />
 		<Unit filename="chabot.cpp" />
 		<Unit filename="chabot.h" />
+		<Unit filename="handDetect.cpp" />
+		<Unit filename="handdetect.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion>

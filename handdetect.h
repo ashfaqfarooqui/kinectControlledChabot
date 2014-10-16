@@ -6,4 +6,7 @@
 bool calib=false;
 int cnt=0;
 
+double calculateArea(cv::Mat,int,int);
+bool isHandOpen(double,int);
+
 #endif // HANDDETECT_H_INCLUDED
